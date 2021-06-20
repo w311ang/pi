@@ -16,6 +16,7 @@ try:
     tokens=pickle.load(f)
     token=tokens[username]
 except FileNotFoundError:
+  tokens={}
   token=''
 except KeyError:
   pass
