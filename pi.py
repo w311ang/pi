@@ -39,5 +39,6 @@ else:
     prjson=proof.json()
     error=prjson['error']
     print(error)
-
+  except:
+    pass
   raise Exception(str(prstatus)+'未知错误')
