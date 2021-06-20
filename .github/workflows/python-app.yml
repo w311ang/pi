@@ -26,9 +26,9 @@ jobs:
         with:
           path: |
             ./tokens.txt
-        key: build-${{ github.run_id }}
-        restore-keys: |
-          build-
+          key: build-${{ github.run_id }}
+          restore-keys: |
+            build-
       - name: Account 1
         env:
           userpass: ${{ secrets.userpass1 }}
