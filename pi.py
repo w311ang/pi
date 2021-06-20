@@ -21,13 +21,13 @@ except FileNotFoundError:
 except KeyError:
   pass
 session=requests.Session()
-session.headers.update({'authorization':'Bearer '+token})
 if session.get(api+'/api/pi').status_code!=200:
   login=session.post(api+'/api/password_sign_in',data={'phone_number':username,'password':password}).json()
   token=login['credentials']['access_token']
-with open('tokens.txt','wb') as f:
-  tokens[username]=token
-  pickle.dump(tokens,f)
+  with open('tokens.txt','wb') as f:
+    tokens[username]=token
+    pickle.dump(tokens,f)
+session.headers.update({'authorization':'Bearer '+token})
 
 expires=False
 while not expires:
