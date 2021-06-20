@@ -2,13 +2,29 @@ import requests
 import time
 import random
 import os
+import pickle
 
-token=os.getenv('token')
 api='https://socialchain.app'
 timing=True
 
+userpass=os.getenv('userpass')
+userpass=userpass.split()
+username=userpass[0]
+password=userpass[1]
+try:
+  with open('tokens.txt','rb') as f:
+    tokens=pickle.load(f)
+    token=tokens[username]
+except FileNotFoundError:
+  token=''
+except KeyError:
+  pass
 session=requests.Session()
 session.headers.update({'authorization':'Bearer '+token})
+if session.get(api+'/api/pi').status_code!=200:
+  login=session.post(api+'/api/password_sign_in',data={'phone_number':username,'password':password}).json()
+  token=login['credentials']['access_token']
+
 expires=False
 while not expires:
   if timing==True:
@@ -43,3 +59,7 @@ else:
   except json.decoder.JSONDecodeError:
     pass
   raise Exception(str(prstatus)+'未知错误')
+
+with open('tokens.txt','wb') as f:
+  tokens[username]=token
+  pickle.dump(tokens,f)
