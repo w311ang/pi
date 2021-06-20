@@ -24,6 +24,9 @@ session.headers.update({'authorization':'Bearer '+token})
 if session.get(api+'/api/pi').status_code!=200:
   login=session.post(api+'/api/password_sign_in',data={'phone_number':username,'password':password}).json()
   token=login['credentials']['access_token']
+with open('tokens.txt','wb') as f:
+  tokens[username]=token
+  pickle.dump(tokens,f)
 
 expires=False
 while not expires:
@@ -55,11 +58,6 @@ else:
   try:
     prjson=proof.json()
     error=prjson['error']
-    print(error)
+    raise Exception('%s %s'%(prstatus,error))
   except json.decoder.JSONDecodeError:
-    pass
-  raise Exception(str(prstatus)+'未知错误')
-
-with open('tokens.txt','wb') as f:
-  tokens[username]=token
-  pickle.dump(tokens,f)
+    raise Exception(str(prstatus)+'未知错误')
