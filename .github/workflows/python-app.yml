@@ -23,31 +23,31 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Account 1
         env:
-          token: ${{ secrets.token1 }}
+          userpass: ${{ secrets.userpass1 }}
         run: |
           python -u pi.py
       - name: Account 2
         env:
-          token: ${{ secrets.token2 }}
+          userpass: ${{ secrets.userpass2 }}
         run: |
           python -u pi.py
       - name: Account 3
         env:
-          token: ${{ secrets.token3 }}
+          userpass: ${{ secrets.userpass3 }}
         run: |
           python -u pi.py
       - name: Account 4
         env:
-          token: ${{ secrets.token4 }}
+          userpass: ${{ secrets.userpass4 }}
         run: |
           python -u pi.py
       - name: Account 5
         env:
-          token: ${{ secrets.token5 }}
+          userpass: ${{ secrets.userpass5 }}
         run: |
           python -u pi.py
       - name: Account 6
         env:
-          token: ${{ secrets.token6 }}
+          userpass: ${{ secrets.userpass6 }}
         run: |
           python -u pi.py
