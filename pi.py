@@ -5,7 +5,7 @@ import os
 import pickle
 
 api='https://socialchain.app'
-timing=False
+timing=True
 
 userpass=os.getenv('userpass')
 userpass=userpass.split()
@@ -35,8 +35,7 @@ while not expires:
     time.sleep(60)
   else:
     time.sleep(3)
-  me=session.get(api+'/api/pi')
-  print(me.text)
+  me=session.get(api+'/api/pi').json()
   is_mining=me['mining_status']['is_mining']
   #is_mining='false'
   if is_mining=='false':
