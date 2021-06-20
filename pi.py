@@ -1,10 +1,11 @@
 import requests
 import time
 import random
+import os
 
-token='lwSTISLtFxgKaic-2Wbo60yZDIdZeGg3xWmSVhdc1Sk'
+token=os.getenv('token')
 api='https://socialchain.app'
-timing=False
+timing=True
 
 session=requests.Session()
 session.headers.update({'authorization':'Bearer '+token})
