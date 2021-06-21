@@ -38,24 +38,6 @@ jobs:
           userpass: ${{ secrets.userpass1 }}
         run: |
           python -u pi.py
-      - name: Account 2
-        if: always()
-        env:
-          userpass: ${{ secrets.userpass2 }}
-        run: |
-          python -u pi.py
-      - name: Account 3
-        if: always()
-        env:
-          userpass: ${{ secrets.userpass3 }}
-        run: |
-          python -u pi.py
-      - name: Account 4
-        if: always()
-        env:
-          userpass: ${{ secrets.userpass4 }}
-        run: |
-          python -u pi.py
       - name: Account 5
         if: always()
         env:
