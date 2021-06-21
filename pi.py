@@ -5,8 +5,12 @@ import os
 import pickle
 
 api='https://socialchain.app'
-timing=True
 
+on=os.getenv('on')
+if on=='schedule':
+  timing=True
+else:
+  timing=False
 userpass=os.getenv('userpass')
 userpass=userpass.split()
 username=userpass[0]
