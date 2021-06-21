@@ -13,7 +13,7 @@ def tostamp(timestr):
   return stamp
 
 on=os.getenv('on')
-if False:
+if on=='schedule':
   timing=True
 else:
   timing=False
