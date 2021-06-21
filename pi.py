@@ -35,8 +35,8 @@ session.headers.update({'authorization':'Bearer '+token})
 if token=='' or session.get(api+'/api/pi').status_code!=200:
   login=session.post(api+'/api/password_sign_in',data={'phone_number':username,'password':password}).json()
   if 'error' in login:
-    print(login['error'])
-  else
+    raise Exception(login['error'])
+  else:
     token=login['credentials']['access_token']
   session.headers.update({'authorization':'Bearer '+token})
   with open('tokens.txt','wb') as f:
