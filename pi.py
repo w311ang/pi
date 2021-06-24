@@ -53,7 +53,8 @@ if is_mining==True:
   if diff>60*60:
     print('过期时间超过一小时')
     exit()
-  time.sleep(diff)
+  else:
+    time.sleep(diff)
 
 if timing==True:
   thetime=random.randint(5,20)
