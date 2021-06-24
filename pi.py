@@ -43,28 +43,17 @@ if token=='' or session.get(api+'/api/pi').status_code!=200:
     tokens[username]=token
     pickle.dump(tokens,f)
 
-expires=False
-while not expires:
-  if timing==True:
-    time.sleep(60)
-  else:
-    time.sleep(3)
-  me=session.get(api+'/api/pi').json()
-  is_mining=me['mining_status']['is_mining']
-  if is_mining==True:
-    expires_at=me['mining_status']['expires_at']
-    #print(expires_at)
-    expires_at=tostamp(expires_at)
-    now=time.time()
-    diff=expires_at-now
-    #print(diff)
-    if diff>60*60:
-      print('过期时间超过一小时')
-      exit()
-  #print(is_mining)
-  #is_mining='false'
-  if is_mining==False:
-    expires=True
+me=session.get(api+'/api/pi').json()
+is_mining=me['mining_status']['is_mining']
+if is_mining==True:
+  expires_at=me['mining_status']['expires_at']
+  expires_at=tostamp(expires_at)
+  now=time.time()
+  diff=expires_at-now
+  if diff>60*60:
+    print('过期时间超过一小时')
+    exit()
+  time.sleep(diff)
 
 if timing==True:
   thetime=random.randint(5,20)
