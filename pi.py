@@ -51,7 +51,7 @@ if is_mining==True:
   expires_at=tostamp(expires_at)
   now=time.time()
   diff=expires_at-now
-  if not diff>60*60:
+  if diff>60*60:
     print('过期时间超过一小时')
     exit()
   else:
