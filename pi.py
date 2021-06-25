@@ -4,6 +4,7 @@ import random
 import os
 import pickle
 import dateutil.parser
+from retrying import retry
 
 api='https://socialchain.app'
 
@@ -61,19 +62,22 @@ if timing==True:
   time.sleep(thetime*60)
   print('随机等待%smin'%thetime)
 
-proof=session.post(api+'/api/proof_of_presences',data={'recaptcha_token':None})
-prstatus=proof.status_code
-if prstatus==200:
-  print('续期成功')
-elif prstatus==500:
-  prjson=proof.json()
-  raise Exception(prjson['error'])
-elif prstatus==401:
-  raise Exception('token已过期')
-else:
-  try:
+@retry(stop_max_attempt_number=10, wait_random_min=5, wait_random_max=20)
+def reward():
+  proof=session.post(api+'/api/proof_of_presences',data={'recaptcha_token':None})
+  prstatus=proof.status_code
+  if prstatus==200:
+    print('续期成功')
+  elif prstatus==500:
     prjson=proof.json()
-    error=prjson['error']
-    raise Exception('%s %s'%(prstatus,error))
-  except json.decoder.JSONDecodeError:
-    raise Exception(str(prstatus)+'未知错误')
+    raise Exception(prjson['error'])
+  elif prstatus==401:
+    raise Exception('token已过期')
+  else:
+    try:
+      prjson=proof.json()
+      error=prjson['error']
+      raise Exception('%s %s'%(prstatus,error))
+    except json.decoder.JSONDecodeError:
+      raise Exception(str(prstatus)+'未知错误')
+reward()
