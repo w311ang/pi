@@ -62,7 +62,7 @@ if timing==True:
   time.sleep(thetime*60)
   print('随机等待%smin'%thetime)
 
-@retry(stop_max_attempt_number=10, wait_random_min=5, wait_random_max=20)
+@retry(stop_max_attempt_number=10, wait_random_min=5*60000, wait_random_max=20*60000)
 def reward():
   proof=session.post(api+'/api/proof_of_presences',data={'recaptcha_token':None})
   prstatus=proof.status_code
