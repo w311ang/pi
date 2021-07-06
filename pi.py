@@ -53,7 +53,7 @@ if is_mining==True:
   diff=expires_at-now
   tmhour=time.localtime().tm_hour
   expires_hour=time.localtime(expires_at).tm_hour
-  if not tmhour==expires_hour:
+  if tmhour!=expires_hour or diff>60:
     print('过期时间超过一小时')
     exit()
   else:
