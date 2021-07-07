@@ -57,17 +57,26 @@ jobs:
         if: always()
         env:
           userpass: ${{ secrets.userpass1 }}
-        run: |
-          proxychains python -u pi.py
+        uses: nick-invision/retry@v2
+        with:
+          timeout_seconds: 15
+          max_attempts: 3
+          command: proxychains python -u pi.py
       - name: Account 5
         if: always()
         env:
           userpass: ${{ secrets.userpass5 }}
-        run: |
-          proxychains python -u pi.py
+        uses: nick-invision/retry@v2
+        with:
+          timeout_seconds: 15
+          max_attempts: 3
+          command: proxychains python -u pi.py
       - name: Account 6
         if: always()
         env:
           userpass: ${{ secrets.userpass6 }}
-        run: |
-          proxychains python -u pi.py
+        uses: nick-invision/retry@v2
+        with:
+          timeout_seconds: 15
+          max_attempts: 3
+          command: proxychains python -u pi.py
