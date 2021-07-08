@@ -59,7 +59,7 @@ jobs:
           userpass: ${{ secrets.userpass1 }}
         uses: nick-invision/retry@v2
         with:
-          timeout_seconds: 15
+          timeout_minutes: 60
           max_attempts: 3
           command: proxychains python -u pi.py
       - name: Account 5
@@ -68,7 +68,7 @@ jobs:
           userpass: ${{ secrets.userpass5 }}
         uses: nick-invision/retry@v2
         with:
-          timeout_seconds: 15
+          timeout_minutes: 60
           max_attempts: 3
           command: proxychains python -u pi.py
       - name: Account 6
@@ -77,6 +77,6 @@ jobs:
           userpass: ${{ secrets.userpass6 }}
         uses: nick-invision/retry@v2
         with:
-          timeout_seconds: 15
+          timeout_minutes: 60
           max_attempts: 3
           command: proxychains python -u pi.py
