@@ -80,3 +80,4 @@ jobs:
           timeout_minutes: 60
           max_attempts: 3
           command: proxychains python -u pi.py
+      - uses: gautamkrishnar/keepalive-workflow@master
