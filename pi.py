@@ -5,6 +5,7 @@ import os
 import pickle
 import dateutil.parser
 from retrying import retry
+from pytools.pytools import secretlog
 
 api='https://socialchain.app'
 
@@ -44,7 +45,9 @@ if token=='' or session.get(api+'/api/pi').status_code!=200:
     tokens[username]=token
     pickle.dump(tokens,f)
 
-me=session.get(api+'/api/pi').json()
+me=session.get(api+'/api/pi')
+print('me: %s'%secretlog(me.text))
+me=me.json()
 is_mining=me['mining_status']['is_mining']
 if is_mining==True:
   expires_at=me['mining_status']['expires_at']
