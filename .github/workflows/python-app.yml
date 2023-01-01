@@ -47,6 +47,7 @@ jobs:
         with:
           timeout_minutes: 60
           max_attempts: 3
+          retry_wait_seconds: 60
           on_retry_command: |
             sudo systemctl restart shadowsocks-libev-local@client
             sleep 5s
@@ -60,6 +61,7 @@ jobs:
         with:
           timeout_minutes: 60
           max_attempts: 3
+          retry_wait_seconds: 60
           on_retry_command: |
             sudo systemctl restart shadowsocks-libev-local@client
             sleep 5s
@@ -73,6 +75,7 @@ jobs:
         with:
           timeout_minutes: 60
           max_attempts: 3
+          retry_wait_seconds: 60
           on_retry_command: |
             sudo systemctl restart shadowsocks-libev-local@client
             sleep 5s
