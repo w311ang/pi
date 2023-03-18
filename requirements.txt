@@ -3,3 +3,4 @@ python-dateutil
 retrying
 git+https://github.com/w311ang/pytools.git@package
 PyCryptodome
+httpx
